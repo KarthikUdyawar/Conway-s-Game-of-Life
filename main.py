@@ -5,6 +5,7 @@ from itertools import product
 import random
 import sys
 import time
+import csv
 
 import pygame
 
@@ -22,7 +23,7 @@ BLACK = (0, 0, 0)
 pygame.init()
 screen = pygame.display.set_mode(SCREEN_SIZE)
 pygame.display.set_caption("Conway's Game of Life")
-Icon = pygame.image.load("./image/icon.png")
+Icon = pygame.image.load("./images/icon.png")
 pygame.display.set_icon(Icon)
 
 
@@ -141,6 +142,13 @@ if __name__ == "__main__":
                 # ? Press C key to clear the grid
                 if event.key == pygame.K_c:
                     grid = create_grid(width, height, randomize=False)
+                    
+                # ? Press S key to save the grid
+                if event.key == pygame.K_s:
+                    with open('grid_map.csv', 'w', newline='') as csvfile:
+                        writer = csv.writer(csvfile)
+                        writer.writerows([list(x) for x in zip(*grid)])
+                        print("Save")
 
             # ? Press or hold left mouse button to toggle the state of cell
             if event.type == pygame.MOUSEBUTTONUP:
