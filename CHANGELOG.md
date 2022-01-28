@@ -9,11 +9,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ---
 
-## 0.0.4 - 2022-01-28
+## 0.1.0 - 2022-01-29
+
+### Added
+
+- **Added Examples:** Two example are added for demo.
 
 ### Changed
 
-- **Improve save & load function:** User can enter the file name to save or load grid from csv file.
+- Update [README.md](https://github.com/KarthikUdyawar/Conway-s-Game-of-Life/blob/main/README.md) and [.gitattributes](https://github.com/KarthikUdyawar/Conway-s-Game-of-Life/blob/main/.gitattributes) files.
+
+---
+
+## [0.0.4](https://github.com/KarthikUdyawar/Conway-s-Game-of-Life/compare/07184fb...58653bd) - 2022-01-28
+
+### Changed
+
+- **Improve save & load function:** User can enter the file name to save or load grid from csv file. ([58653bd](https://github.com/KarthikUdyawar/Conway-s-Game-of-Life/commit/58653bd9af10fcf3d6d19dd10f3cc12e20bba565))
 
 ---
 

@@ -125,13 +125,25 @@ List things you need to use the software and how to install them.
    pip install -r requirements.txt
    ```
 
+### Run
+
+- To run the code
+  ```sh
+   python main.py
+  ```
+
 <!-- USAGE EXAMPLES -->
 
 ## Usage
 
-To study and visualize of Conway's Game of Life using pygame
-
-_For more examples, please refer to the [Documentation](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)_
+|       Key       |        Action        |
+| :-------------: | :------------------: |
+|     `Enter`     |  Toggle pause time   |
+| `Click or Drag` | Toggle cell's state  |
+|       `R`       | Generate random seed |
+|       `C`       |        Clear         |
+|       `S`       |         Save         |
+|       `L`       |         Load         |
 
 <!-- ROADMAP -->
 
@@ -162,6 +174,11 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 Project Link: [https://github.com/KarthikUdyawar/Conway-s-Game-of-Life](https://github.com/KarthikUdyawar/Conway-s-Game-of-Life)
+
+## Acknowledgements
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
+- [Scholarpedia](http://www.scholarpedia.org/article/Game_of_Life)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
