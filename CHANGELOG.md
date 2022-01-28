@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- **Added Examples:** Two example are added for demo.
+- **Added Examples:** Two example are added for demo. ([d29dabb](https://github.com/KarthikUdyawar/Conway-s-Game-of-Life/commit/d29dabb3634ef02cd3085c2dd288813bea4f2ef3))
 
 ### Changed
 
