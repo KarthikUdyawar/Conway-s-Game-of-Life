@@ -27,23 +27,30 @@ Icon = pygame.image.load("./images/icon.png")
 pygame.display.set_icon(Icon)
 
 
-def create_grid(width: int, height: int, randomize: bool = False) -> "list[list[int]]":
+def create_grid(
+    width: int,
+    height: int,
+    lord_grid: "list[list[int]]" = None,
+    randomize: bool = False,
+) -> "list[list[int]]":
     """Generates grid with required width and height
 
     Args:
         width (int): Width of the grid
         height (int): height of the grid
+        lord_grid (list[list[int]]):  Load the grid. Defaults to None.
         randomize (bool, optional): If it is set True then it will generate random cluster
                                     else blank grid. Defaults to False.
 
     Returns:
         list[list[int]]: 2D list repression of a grid containing 0 and 1
     """
-    return (
-        [[random.choice([0, 1]) for _ in range(height)] for _ in range(width)]
-        if randomize
-        else [[0 for _ in range(height)] for _ in range(width)]
-    )
+    if randomize:
+        return [[random.choice([0, 1]) for _ in range(height)] for _ in range(width)]
+    elif lord_grid:
+        return lord_grid
+    else:
+        return [[0 for _ in range(height)] for _ in range(width)]
 
 
 def get_neighbours(x: int, y: int, grid: "list[list[int]]") -> list:
@@ -142,13 +149,25 @@ if __name__ == "__main__":
                 # ? Press C key to clear the grid
                 if event.key == pygame.K_c:
                     grid = create_grid(width, height, randomize=False)
-                    
+
                 # ? Press S key to save the grid
                 if event.key == pygame.K_s:
-                    with open('grid_map.csv', 'w', newline='') as csvfile:
+                    with open("grid_map.csv", "w", newline="") as csvfile:
                         writer = csv.writer(csvfile)
                         writer.writerows([list(x) for x in zip(*grid)])
-                        print("Save")
+                    print("Save")
+
+                # ? Press L key to load the grid
+                if event.key == pygame.K_l:
+                    with open("grid_map.csv", "r", newline="") as csvfile:
+                        grid_matrix = [
+                            [int(x) for x in rec]
+                            for rec in csv.reader(csvfile, delimiter=",")
+                        ]
+                        grid_matrix_T = [list(x) for x in zip(*grid_matrix)]
+
+                    grid = create_grid(width, height, lord_grid=grid_matrix_T)
+                    print("Load")
 
             # ? Press or hold left mouse button to toggle the state of cell
             if event.type == pygame.MOUSEBUTTONUP:
