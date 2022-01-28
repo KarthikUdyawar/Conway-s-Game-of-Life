@@ -1,4 +1,4 @@
-from os import environ
+from os import environ, path
 
 environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 from itertools import product
@@ -39,8 +39,7 @@ def create_grid(
         width (int): Width of the grid
         height (int): height of the grid
         lord_grid (list[list[int]]):  Load the grid. Defaults to None.
-        randomize (bool, optional): If it is set True then it will generate random cluster
-                                    else blank grid. Defaults to False.
+        randomize (bool, optional): If it is set True then it will generate random cluster else blank grid. Defaults to False.
 
     Returns:
         list[list[int]]: 2D list repression of a grid containing 0 and 1
@@ -126,6 +125,36 @@ def drag_mouse(mouse_dragging: bool) -> None:
         grid[col][row] = 1 if grid[col][row] == 0 else 0
 
 
+def save_grid():
+    """Saves the grid states in csv format"""
+    csvfile = str(input("Save as: "))
+    with open(f"./load/{csvfile}.csv", "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerows([list(x) for x in zip(*grid)])
+    print("Save")
+
+
+def load_grid() -> "list[list[int]]":
+    """Load the grid states from csv file
+
+    Returns:
+        list[list[int]]: 2D list repression of a grid containing 0 and 1
+    """
+    csvfile = str(input("Load as: "))
+    if path.isfile(f"./load/{csvfile}.csv"):
+        with open(f"./load/{csvfile}.csv", "r", newline="") as csvfile:
+            grid_matrix = [
+                [int(x) for x in rec] for rec in csv.reader(csvfile, delimiter=",")
+            ]
+            grid_matrix_T = [list(x) for x in zip(*grid_matrix)]
+
+        print("Load")
+        return create_grid(width, height, lord_grid=grid_matrix_T)
+    else:
+        print("File not found")
+        return grid
+
+
 # * Game initiation
 previous_state = time.time()
 grid = create_grid(width, height, randomize=True)
@@ -135,6 +164,7 @@ running = True
 
 # * Main loop
 if __name__ == "__main__":
+    print("Welcome to Conway's Game of Life Simulator")
     while running:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -152,22 +182,11 @@ if __name__ == "__main__":
 
                 # ? Press S key to save the grid
                 if event.key == pygame.K_s:
-                    with open("grid_map.csv", "w", newline="") as csvfile:
-                        writer = csv.writer(csvfile)
-                        writer.writerows([list(x) for x in zip(*grid)])
-                    print("Save")
+                    save_grid()
 
                 # ? Press L key to load the grid
                 if event.key == pygame.K_l:
-                    with open("grid_map.csv", "r", newline="") as csvfile:
-                        grid_matrix = [
-                            [int(x) for x in rec]
-                            for rec in csv.reader(csvfile, delimiter=",")
-                        ]
-                        grid_matrix_T = [list(x) for x in zip(*grid_matrix)]
-
-                    grid = create_grid(width, height, lord_grid=grid_matrix_T)
-                    print("Load")
+                    grid = load_grid()
 
             # ? Press or hold left mouse button to toggle the state of cell
             if event.type == pygame.MOUSEBUTTONUP:
