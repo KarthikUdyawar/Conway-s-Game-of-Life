@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ---
 
+## 0.1.1 - 2022-01-29
+
+### Fixed
+
+- Issue fixed [#1](https://github.com/KarthikUdyawar/Conway-s-Game-of-Life/issues/1)
+
 ## 0.1.0 - 2022-01-29
 
 ### Added

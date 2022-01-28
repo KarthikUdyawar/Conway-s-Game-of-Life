@@ -122,7 +122,8 @@ def drag_mouse(mouse_dragging: bool) -> None:
     if mouse_dragging:
         x, y = pygame.mouse.get_pos()
         col, row = x // CELL_SIZE, y // CELL_SIZE
-        grid[col][row] = 1 if grid[col][row] == 0 else 0
+        state = grid[col][row]
+        state = 1 if state == 0 else 0
 
 
 def save_grid():
